@@ -1,0 +1,230 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+
+  <style>
+    #myCanvas {
+
+
+      border: 5px solid black;
+
+    }
+</style>
+
+ </head>
+
+<body>
+
+  <h1 id = "mp">My Simple Paint(Traingle)</h1>
+
+  <canvas id="myCanvas" width="1320" height="500">
+Your browser does not support the HTML5 canvas tag.</canvas>
+
+</body>
+<script>
+  var cont = document.getElementById("myCanvas");
+  var cntx = cont.getContext("2d");
+  var colorToBeFilled;
+  var newTri,prevTri;
+  var ra = 1,rb = 1,rc = 1; // ratios of all the sides
+  var x1,x2,x3;
+  var y1,y2,y3;
+  var s;
+  var prevX,prevY;
+  let co = cont.getBoundingClientRect();
+  var boxX  = co.left;
+  var boxY = co.top;
+  var allTriangles = new Array();
+
+  function getRandomColor() {
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  }
+  function fixRatio(){
+    ra = document.getElementById("myform").elements.item(0).value;
+    rb = document.getElementById("myform").elements.item(1).value;
+    rc = document.getElementById("myform").elements.item(2).value;
+  }
+  function chalo(e){
+    if(!e)
+      e = window.event;
+    x1 = e.clientX - boxX;
+    y1 = e.clientY - boxY;
+    s = -1;
+    for( var k = allTriangles.length-1;k>=0;k--){
+      var vertx = [allTriangles[k][0],allTriangles[k][2],allTriangles[k][4]];
+      var verty = [allTriangles[k][1],allTriangles[k][3],allTriangles[k][5]];
+      if(isInTriangle(vertx,verty,x1,y1) == true){
+        s = k;
+        break;
+      }
+    }
+    if(s == -1){//new triangle
+      colorToBeFilled = getRandomColor();
+      newTri = setInterval(startDrawing(x1,y1),100);
+    }
+    else{// move old triangle
+      prevX = x1;
+      prevY = y1;
+      prevTri = setInterval(startMoving(),100);
+    }
+  }
+
+  function startMoving(i){
+    document.getElementById("myCanvas").addEventListener("mousemove",moveTri);
+  }
+
+  //moving old triangle
+  function moveTri(i,e){
+    if(!e)
+      e = window.event;
+    var x = e.clientX - boxX;
+    var y = e.clientY - boxY;
+
+    var diffX = prevX - x;
+    var diffY = prevY - y;
+    prevX = x;
+    prevY = y;
+
+    allTriangles[s][0] = allTriangles[s][0] - diffX;
+    allTriangles[s][1] = allTriangles[s][1] - diffY;
+    allTriangles[s][2] = allTriangles[s][2] - diffX;
+    allTriangles[s][3] = allTriangles[s][3] - diffY;
+    allTriangles[s][4] = allTriangles[s][4] - diffX;
+    allTriangles[s][5] = allTriangles[s][5] - diffY;
+    var temp = allTriangles[s];
+  //  alert(temp);
+    for(var i = s;i<allTriangles.length-1;i++){
+      allTriangles[i] = allTriangles[i+1];
+    }
+    allTriangles.pop();
+    allTriangles.push(temp);
+    cntx.clearRect(0, 0, cont.width, cont.height);
+    for(var k = 0;k<allTriangles.length;k++){
+      drawTriangle(allTriangles[k][0],allTriangles[k][1],allTriangles[k][2],allTriangles[k][3],allTriangles[k][4],allTriangles[k][5],allTriangles[k][6]);
+    }
+    s = allTriangles.length - 1;
+  }
+  document.getElementById("myCanvas").addEventListener("mousedown",chalo);
+
+// finding third vertix
+  function thirdVertix(x1,y1,x2,y2){
+    x3 = (x2-x1)/2 + (y2-y1)*0.866;
+    y3 = -(x2-x1)*0.866 + (y2-y1)/2;
+    x3 = x3+x1;
+    y3 = y3+y1;
+    x3 = x3*(ra/rc);
+    y3 = y3*(ra/rc);
+  }
+
+// drawing triangle
+  function drawTriangle(a,b,c,d,e,f,color){
+      cntx.beginPath();
+      cntx.moveTo(a,b);
+      cntx.lineTo(c,d);
+      cntx.lineTo(e,f);
+      cntx.fillStyle = color;
+      cntx.closePath();
+      cntx.fill();
+      cntx.stroke();
+
+  }
+  function move(e){
+    if(!e)
+      e = window.event;
+    x2 = e.clientX - boxX;
+    y2 = e.clientY - boxY;
+    x2 = x2*(ra/rb);
+    y2 = y2*(ra/rb);
+    cntx.clearRect(0, 0, cont.width, cont.height);
+    for(var i = 0;i<allTriangles.length;i++){
+      drawTriangle(allTriangles[i][0],allTriangles[i][1],allTriangles[i][2],allTriangles[i][3],allTriangles[i][4],allTriangles[i][5],allTriangles[i][6]);
+    }
+    thirdVertix(x1,y1,x2,y2);
+    drawTriangle(x1,y1,x2,y2,x3,y3,colorToBeFilled);
+  }
+
+  // start draging
+  function startDrawing(x1,y1){
+    document.getElementById("myCanvas").addEventListener("mousemove",move);
+  }
+
+  // dragging done
+  document.getElementById("myCanvas").onmouseup = function(e){
+    if(prevTri){// to move triangle
+      document.getElementById("myCanvas").removeEventListener("mousemove",moveTri);
+      clearInterval(prevTri);
+    }
+    else{// for new triangle
+      document.getElementById("myCanvas").removeEventListener("mousemove",move);
+      if(x1 && x2 && x3 && y1 && y2 && y3)
+        allTriangles.push([x1,y1,x2,y2,x3,y3,colorToBeFilled]);
+      clearInterval(newTri);
+
+    }
+    prevTri = null;
+    newTri = null;
+    x1 = null;x2 = null;x3 = null;
+    y1 = null;y2 = null;y3 = null;
+  }
+
+  // check if point is inside triangle or
+  function isInTriangle(vertx,verty,testx,testy){
+    var i, j, c = false;
+    for( i = 0, j = 2; i < 3; j = i++ ) {
+        if( ( ( verty[i] > testy ) != ( verty[j] > testy ) ) &&
+            ( testx < ( vertx[j] - vertx[i] ) * ( testy - verty[i] ) / ( verty[j] - verty[i] ) + vertx[i] ) ) {
+                c = !c;
+        }
+    }
+    return c;
+  }
+
+
+
+//double click event
+  document.getElementById("myCanvas").addEventListener("dblclick", myScript);
+  function myScript(e){
+    if(!e)
+      e = window.event;
+    testx = e.clientX - boxX;
+    testy = e.clientY - boxY;
+  //  alert(testx);
+    var t = -1;
+    for( var k = allTriangles.length-1;k>=0;k--){
+      var vertx = [allTriangles[k][0],allTriangles[k][2],allTriangles[k][4]];
+      var verty = [allTriangles[k][1],allTriangles[k][3],allTriangles[k][5]];
+      if(isInTriangle(vertx,verty,testx,testy) == true){
+        t = k;
+        break;
+      }
+    }
+    if(t >= 0){
+      allTriangles.splice(t,1);
+    }
+    cntx.clearRect(0, 0, cont.width, cont.height);
+    for(var i = 0;i<allTriangles.length;i++){
+      drawTriangle(allTriangles[i][0],allTriangles[i][1],allTriangles[i][2],allTriangles[i][3],allTriangles[i][4],allTriangles[i][5],allTriangles[i][6]);
+      }
+    };
+
+
+  function clear(){
+    allTriangles.length = 0;
+    cntx.clearRect(0, 0, cont.width, cont.height);
+  }
+
+</script>
+<form id = "myform" onsubmit="clear()">
+  a:<input type="text" name="a" value="1">
+  b:<input type="text" name="b" value="1">
+  c:<input type="text" name="b" value="1">
+  <button type="button" onclick="fixRatio()">fix ratio</button>
+  <input type="submit" id = "sub" value="clear">
+</form>
+</html>

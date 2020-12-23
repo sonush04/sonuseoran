@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="{% static 'css/cssfile.css'%}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+  </head>
+  <body>
+
+<main class="main">
+  <aside class="sidebars">
+    <nav class="navs">
+      <ul>
+        <li class = "active" id="wel"><a href="#welcome">Welcome</a></li>
+        <li id="abt"><a href="#about">About</a></li>
+        <li id="skil"><a href="#skills">Skills</a></li>
+        <li id="pro"><a href="#projects">Projects</a></li>
+        <li id="cont"><a href="#contact">Get In Touch</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <div class="block1" id="welcome">
+    <div class="row">
+      <div class="col-6 name">
+        <h1>I'm
+          <span class="txt-rotate" data-period="2000" data-rotate='["Sonu Seoran", "Programmer","Web Developer", "Learner" ]'></span>
+        </h1>
+      </div>
+      <div class="col-6 social">
+        <ul style="list-style: none;">
+          <li><a class="b" href="https://github.com/sonush04"><i class="fa fa-github"></i> </a></li>
+          <li><a class="b" href="https://www.linkedin.com/in/sonu-seoran-420792183/"><i class="fa fa-linkedin-square"></i> </a></li>
+          <li><a class="b" href="https://www.hackerrank.com/Sonush0409"><i class="fa fa-hackerrank"></i> </a></li>
+          <li><a class="b" href="https://wa.me/916305675843"><i class="fa fa-whatsapp"></i> </a></li>
+          <li><a class="b" href="https://www.instagram.com/__shheoran__/"><i class="fa fa-instagram"></i> </a></li>
+          <li><a class="b" href="https://www.facebook.com/sonu.sheoran.3950"><i class="fa fa-facebook"></i> </a></li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+  <!-- About me -->
+
+  <div class = "block2" id = "about">
+    <div class="author-quote-wrap ">
+      <input class="toggle-quote" type="radio" id="AQ-1" name="quote" checked>
+      <div class="author-quote">
+        <div class="pull-left author-photo photo-a animated bounceInLeft">
+    </div>
+        <div class="pull-right quote-content">
+          <div class="quote-text animated rotateInDownRight">Hey, I'm Sonu, CSE undergraduate from NIT Andhra.  I am ambitious , self driven and constantly set goals for Myself.Having a steady source of motivation drives me to the best.Always craves for new emerging technology and tools.Developing crazy things with tools and software is pasttime to me.</div>
+        </div>
+      </div>
+      </div>
+  </div>
+
+
+<!-- skills -->
+
+
+<div class="block1" id = "skills" >
+  <div class="container">
+  <h3 style="text-align:center;color:black;">SKILLS</h3>
+  <br>
+  <div class="set-size charts-container">
+    <div class="pie-wrapper progress-90 style-2">
+      <span class="label">90%<br><span class="smaller">C++</span></span>
+      <div class="pie">
+        <div class="left-side half-circle"></div>
+        <div class="right-side half-circle"></div>
+      </div>
+      <div class="shadow"></div>
+    </div>
+
+    <div class="pie-wrapper progress-75 style-2">
+        <span class="label">75%<br><span class="smaller">Javascript</span></span>
+      <div class="pie">
+        <div class="left-side half-circle"></div>
+        <div class="right-side half-circle"></div>
+      </div>
+      <div class="shadow"></div>
+    </div>
+
+    <div class="pie-wrapper progress-60 style-2">
+        <span class="label">60%<br><span class="smaller">Java</span></span>
+      <div class="pie">
+        <div class="left-side half-circle"></div>
+        <div class="right-side half-circle"></div>
+      </div>
+      <div class="shadow"></div>
+    </div>
+
+    <div class="pie-wrapper progress-60 style-2">
+        <span class="label">60%<br><span class="smaller">Django</span></span>
+      <div class="pie">
+        <div class="left-side half-circle"></div>
+        <div class="right-side half-circle"></div>
+      </div>
+      <div class="shadow"></div>
+    </div>
+
+    <br>
+
+    <div class="pie-wrapper progress-60 style-2">
+        <span class="label">60%<br><span class="smaller">Python</span></span>
+      <div class="pie">
+        <div class="left-side half-circle"></div>
+        <div class="right-side half-circle"></div>
+      </div>
+      <div class="shadow"></div>
+    </div>
+
+    <div class="pie-wrapper progress-90 style-2">
+        <span class="label">90%<br><span class="smaller">Data Structure</span></span>
+      <div class="pie">
+        <div class="left-side half-circle"></div>
+        <div class="right-side half-circle"></div>
+      </div>
+      <div class="shadow"></div>
+    </div>
+
+    <div class="pie-wrapper progress-75 style-2">
+        <span class="label">75%<br><span class="smaller">HTML/CSS</span></span>
+      <div class="pie">
+        <div class="left-side half-circle"></div>
+        <div class="right-side half-circle"></div>
+      </div>
+      <div class="shadow"></div>
+    </div>
+
+    <div class="pie-wrapper progress-75 style-2">
+        <span class="label">75%<br><span class="smaller">OOPs</span></span>
+      <div class="pie">
+        <div class="left-side half-circle"></div>
+        <div class="right-side half-circle"></div>
+      </div>
+      <div class="shadow"></div>
+    </div>
+
+      </div>
+  </div>
+</div>
+
+
+<div class="block2" id = "projects">
+  <div class="container">
+    <h1>PROJECTS</h1>
+
+    <ul class="cards">
+      <div class="row">
+        <div class="col-lg-6">
+          <li class="cards_item">
+            <div class="card_">
+              <div class="card_content">
+                <h2 class="card_title">Path Visualization</h2>
+                <p class="card_text">Using: HTML/CSS/Javascript </p>
+                <button class="btn card_btn" onclick="location.href='{% url 'pathfinder'%}'">Check out</button>
+              </div>
+            </div>
+          </li>
+        </div>
+        <div class="col-lg-6">
+          <li class="cards_item">
+            <div class="card_">
+              <div class="card_content">
+                <h2 class="card_title">Blogging Site</h2>
+                <p class="card_text">Using: Django, Python, HTML, Bootstrap</p>
+                <button class="btn card_btn">Check out</button>
+              </div>
+            </div>
+          </li>
+        </div>
+      </div>
+
+    <div class="row">
+      <div class="col">
+        <li class="cards_item">
+          <div class="card_">
+            <div class="card_content">
+              <h2 class="card_title">Play with Triangles</h2>
+              <p class="card_text">Using: HTML/CSS/Javascript </p>
+              <button class="btn card_btn" onclick="location.href='{% url 'triangle'%}'">Check out</button>
+            </div>
+          </div>
+        </li>
+      </div>
+
+      <div class="col">
+        <li class="cards_item">
+          <div class="card_">
+            <div class="card_content">
+              <h2 class="card_title">Instagram Bot</h2>
+              <p class="card_text">Using: Python, Selenium </p>
+              <button class="btn card_btn" onclick="location.href='https://github.com/sonush04/Insta_bot'">Check out</button>
+            </div>
+          </div>
+        </li>
+      </div>
+    </div>
+
+
+      <div class="row">
+        <div class="col">
+          <li class="cards_item">
+            <div class="card_">
+              <div class="card_content">
+                <h2 class="card_title">Tic-Tac-Toe</h2>
+                <p class="card_text">Using: HTML/CSS/Javascript, Jquery, Bootstrap </p>
+                <button class="btn card_btn"  onclick="location.href='{% url 'tictactoe'%}'">Check out</button>
+              </div>
+            </div>
+          </li>
+        </div>
+      </div>
+
+    </ul>
+  </div>
+
+</div>
+
+<!-- contact -->
+
+<div class="block1" id = "contact">
+
+  <h1>GET IN TOUCH</h1>
+  <form method="POST">
+    {% csrf_token %}
+    <div class="input-containers">
+      <div class="row">
+        <div class="col-3"></div>
+        <div class="col-md-auto">
+          <div class="styled-input wide">
+            <input id="name" name="name" type="text" required />
+            <label for="name">Name</label>
+          </div>
+        </div>
+        <div class="col-3"></div>
+      </div>
+
+      <div class="row">
+        <div class="col-3"></div>
+        <div class="col-md-auto">
+          <div class="styled-input wide">
+            <input id="mail" name="mail" type="text" required />
+            <label for="mail" >Email</label>
+          </div>
+        </div>
+        <div class="col-3"></div>
+      </div>
+
+    <div class="row">
+      <div class="col-3"></div>
+      <div class="col-md-auto">
+        <div class="styled-input wide">
+          <textarea id="msg" name="msg" required></textarea>
+          <label for="msg">Message</label>
+        </div>
+      </div>
+      <div class="col-3"></div>
+    </div>
+
+      <div class="col-3">
+        <input class="btn-md submit-btn" type="submit" value="Send">
+      </div>
+    </div>
+  </form>
+
+</div>
+
+
+</main>
+  <script src="{% static 'js/home.js'%}"></script>
+  <script type="text/javascript">
+var n = document.getElementsByTagName("nav");
+var btns = document.querySelector("li");
+
+// Loop through the buttons and add the active class to the current/clicked button
+for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener("click", function() {
+    var current = document.getElementsByClassName("active");
+    current[0].className = current[0].className.replace(" active", "");
+    this.className += " active";
+  });
+}
+  </script>
+  </body>
+</html>

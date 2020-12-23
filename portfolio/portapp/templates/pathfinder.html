@@ -1,0 +1,149 @@
+<!doctype html>
+{% load static %}
+<html>
+<head>
+<title>Finding path</title>
+	<link rel="stylesheet" href="{% static 'pathfinder/cssfornav.css'%}">
+<!--JAVASCRIPT -->
+<script src="http://code.jquery.com/jquery-1.9.1.min.js" ></script>
+<script src = "{% static 'pathfinder/board.js '%}" defer></script>
+<script src = "{% static 'pathfinder/stack_queue.js '%}" defer></script>
+<script src = "{% static 'pathfinder/dijsktra.js '%}" defer></script>
+<script src = "{% static 'pathfinder/dfs.js '%}" defer></script>
+<script src = "{% static 'pathfinder/graph.js '%}" defer></script>
+<script>
+var origin_row;
+var origin_col;
+var ter_row;
+var ter_col;
+var wall = []
+var W = new Array(1000);
+var algo;
+var p = [];
+
+var res = document.getElementById("result");
+var temp2,temp3;
+function origin(){
+        var mytable = document.getElementById("myTable");
+        mytable.addEventListener("mousemove", ori);
+        mytable.onclick = function(){
+                mytable.removeEventListener("mousemove", ori);
+            }
+
+}
+function ori(e){
+         if(!e)
+            e = window.event;
+
+        var target = e.srcElement || e.element;
+        if(temp2)
+            temp2.innerHTML = "";
+            var arr = target.id.split('_');
+            origin_row = arr[0];
+            origin_col = arr[1];
+
+             if(ter_col == origin_col && ter_row == origin_row){
+                window.alert("source and terminal cannot be same");
+                ori;
+            }
+						else if(W[(origin_row-1)*50 + eval(" origin_col-1")] == -1){
+							window.alert("source cannot be on wall");
+						}
+						else{
+            target.innerHTML = "s";
+            temp2 = target;
+        }
+
+}
+var temp1;
+function end(){
+        var mytable = document.getElementById("myTable");
+        mytable.addEventListener("mousemove", en);
+        mytable.onclick = function(){
+                mytable.removeEventListener("mousemove", en);
+            }
+}
+function en(e){
+         if(!e)
+            e = window.event;
+
+        var target = e.srcElement || e.element;
+        if(temp1)
+            temp1.innerHTML = "";
+            var arr1 = target.id.split('_');
+            ter_row = arr1[0];
+            ter_col = arr1[1];
+            if(ter_col == origin_col && ter_row == origin_row){
+                window.alert("source and terminal cannot be same");
+                en;
+            }
+						else if(W[(ter_row-1)*50 + eval(" ter_col-1")] == -1){
+							window.alert("terminal cannot be on wall")
+						}
+						else{
+            target.innerHTML = "t";
+            temp1 = target;
+
+
+            }
+     e.stopImmediatePropagation();
+}
+
+function selectAlgo(){
+    document.getElementById("djk").onclick = function(){
+        algo = 1;
+      document.getElementById("result").innerHTML = "selected algo is dijkstra";
+    }
+    document.getElementById("dfs").onclick = function(){
+        algo = 2;
+      document.getElementById("result").innerHTML = "selected algo is dfs";
+    }
+}
+function impAlgo(){
+    if(algo == 1)
+       shortestPath();
+    if(algo ==2)
+        dfs();
+}
+
+</script>
+</head>
+<body onload = "board()" >
+
+	<div class="navbar">
+ 		 <a href="pathfinder.html">Path finder</a>
+
+		  <div class="dropdown">
+ 		   <button class="dropbtn" onmousemove="selectAlgo()">Algorithms
+  			    <i class="fa fa-caret-down"></i>
+		    </button>
+ 		   <div class="dropdown-content">
+     		 <a id = "djk">Dijkstra's algorithm</a>
+               <a id = "dfs">DFS</a>
+
+   		 </div>
+ 		 </div>
+
+		<a href="javascript:clearBoard()" id = "CB">Clear board</a>
+		<a href="javascript:clearPath()">Clear path</a>
+		<a href="javascript:clearwall()">Clear wall</a>
+		<a href="javascript:addWall()" >Add wall</a>
+
+	</div>
+	<br>
+	<div style = "text-align:center;" >
+    <button  onclick ="origin()" id = "src"> source</button>
+	<button class = "sbutton" id="kk" onclick ="impAlgo()" > Start finding the path</button>
+    <button  onclick ="end()" id = "ter"> terminal</button>
+    Speed: <input type = "range" id = "myRange">
+	</div>
+
+<br><br>
+   <div id="result"> Welcome, select an algorithm</div>
+<br>
+<table id="myTable" border="1" style="border-collapse: collapse;" cellpadding="4" width = "100%" height = "100%">
+
+    </table>
+<br>
+</body>
+</html>
